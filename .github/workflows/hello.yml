@@ -1,12 +1,17 @@
-name: Hello GitHub Actions
+name: First Action
 
 on:
-  push:
-    branches: [ "main" ]
+  push
 
 jobs:
-  say-hello:
+  test-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Print message
-        run: exit 1
+      - name: Step 1
+        run: echo "Step 1 running"
+
+      - name: Step 2
+        run: echo "Step 2 running"
+
+      - name: Step 3
+        run: echo "All steps passed"
