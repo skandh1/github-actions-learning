@@ -1,12 +1,13 @@
 name: First Action
 
 on:
-  push
-
+  workflow_dispatch:
+    
 jobs:
   test-job:
     runs-on: ubuntu-latest
     steps:
+
     - uses: actions/checkout@v4
 
     - name: Show environment info
