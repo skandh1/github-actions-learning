@@ -8,52 +8,32 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-name-job:
-
+  hello-job:
     runs-on: ubuntu-latest
 
-    steps:
-    
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Run with custom shell and directory
-      run: |
-        echo "Shell is bash"
-        pwd
-      shell: bash
-      working-directory: .github
-    
-    - name: Conditional Check again advanced
-      if: ${{github.actor == 'skandh1' && github.ref == 'refs/heads/main'}}
-      run: echo "for me and also in main"
-
-
-  matrix-job:
-    runs-on: ubuntu-latest
     outputs:
-      job-results: ${{steps.generate.outputs.result}}
-
-
-    strategy:
-      matrix:
-        node-version: [18, 20]
-        os: [ubuntu-latest]
+      job-result: ${{ steps.generate.outputs.result }}
 
     steps:
-      - name: Show matrix values
-        run: |
-          echo "Node version: ${{ matrix.node-version }}"
-          echo "OS: ${{ matrix.os }}"
-      
-      - name: Generate Output
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run a command
+        env:
+          MESSAGE: "This message is overridden at step level"
+        run: echo "$MESSAGE"
+
+      - name: Show current directory
+        run: pwd
+
+      - name: Generate output
         id: generate
         run: echo "result=success" >> $GITHUB_OUTPUT
-      
+
 
   second_job:
     runs-on: ubuntu-latest
-    needs: matrix-job
+    needs: hello-job
     steps:
     - name: Read job output
       run: echo "Job result was ${{ needs.matrix-job.outputs.job-result }}"
