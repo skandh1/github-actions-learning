@@ -9,6 +9,7 @@ on:
 
 jobs:
   test-name-job:
+
     runs-on: ubuntu-latest
 
     env: 
@@ -45,3 +46,8 @@ jobs:
     - name: Runs only on the test branch
       if: github.ref == 'refs/heads/test1'
       run: echo "This is the main branch"
+  second-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Second job output
+        run: echo "This is seond job here"
