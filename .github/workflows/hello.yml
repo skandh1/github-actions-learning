@@ -23,4 +23,9 @@ jobs:
         pwd
       shell: bash
       working-directory: .github
+    
+    - name: Conditional Check again advanced
+      if: ${{github.actor == 'skandh1' && github.ref == 'refs/heads/main'}}
+      run: echo "for me and also in main"
+
 
