@@ -42,6 +42,6 @@ jobs:
       if: github.ref == 'refs/heads/main'
       run: echo "This is the main branch"
     
-    - name: Runs only on the main branch
+    - name: Runs only on the test branch
       if: github.ref == 'refs/heads/test1'
       run: echo "This is the main branch"
