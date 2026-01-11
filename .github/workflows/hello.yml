@@ -9,6 +9,9 @@ on:
 jobs:
   test-name-job:
     runs-on: ubuntu-latest
+
+    env: 
+      MESSAGE: This is the message we are showing
     steps:
 
     - uses: actions/checkout@v4
@@ -18,5 +21,9 @@ jobs:
         echo "Repository: $GITHUB_REPOSITORY"
         echo "Branch: $GITHUB_REF"
         echo "Triggered by: $GITHUB_ACTOR"
+    
+    - name: Printing Env's
+      run: echo "$MESSAGE"
+
     - name: Show current dir
       run: pwd
