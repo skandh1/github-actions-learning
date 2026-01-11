@@ -46,9 +46,31 @@ jobs:
     - name: Runs only on the test branch
       if: github.ref == 'refs/heads/test1'
       run: echo "This is the main branch"
+
+    - name: Create a file
+      run: echo "created a file in job on" > message.txt
+    
+    - name: upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: shared-message
+        path: message.txt
+
+
+
+
+
   second-job:
     needs: test-name-job
     runs-on: ubuntu-latest
     steps:
       - name: Second job output
         run: echo "This is seond job here"
+      
+      - name: Downlaod artifact
+        uses: actions/download-artifact@v4
+        with: 
+          name: shared-message
+      
+      - name: Read message
+        run: cat message.txt
