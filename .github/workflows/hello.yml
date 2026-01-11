@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - test1
   workflow_dispatch:
 
 jobs:
@@ -36,3 +37,7 @@ jobs:
 
     - name: Show current dir
       run: pwd
+    
+    - name: Runs only on the main branch
+      if: github.ref == 'ref/heads/main'
+      run: echo "This is the main branch"
