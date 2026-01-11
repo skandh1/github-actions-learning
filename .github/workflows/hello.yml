@@ -16,6 +16,10 @@ jobs:
 
     - uses: actions/checkout@v4
 
+    - name: Continue on error
+      run: exit 1
+      continue-on-error: true
+
     - name: Show environment info
       run: |
         echo "Repository: $GITHUB_REPOSITORY"
