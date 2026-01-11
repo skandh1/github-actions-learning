@@ -24,6 +24,11 @@ jobs:
     
     - name: Printing Env's
       run: echo "$MESSAGE"
+    
+    - name: Overriding Env
+      env: 
+        MESSAGE: Message no 1`
+      run: echo "$MESSAGE"
 
     - name: Show current dir
       run: pwd
