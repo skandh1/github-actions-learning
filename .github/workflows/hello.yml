@@ -9,39 +9,15 @@ on:
 
 jobs:
   test-name-job:
+
     runs-on: ubuntu-latest
 
-    env: 
-      MESSAGE: This is the message we are showing
     steps:
 
-    - uses: actions/checkout@v4
-
-    - name: Continue on error
-      run: exit 1
-      continue-on-error: true
-
-    - name: Show environment info
+    - name: Run with custom shell and directory
       run: |
-        echo "Repository: $GITHUB_REPOSITORY"
-        echo "Branch: $GITHUB_REF"
-        echo "Triggered by: $GITHUB_ACTOR"
-    
-    - name: Printing Env's
-      run: echo "$MESSAGE"
-    
-    - name: Overriding Env
-      env: 
-        MESSAGE: Message no 1`
-      run: echo "$MESSAGE"
+        echo "Shell is bash"
+        pwd
+      shell: bash
+      working-directory: .github
 
-    - name: Show current dir
-      run: pwd
-    
-    - name: Runs only on the main branch
-      if: github.ref == 'ref/heads/main'
-      run: echo "This is the main branch"
-    
-    - name: Runs only on the main branch
-      if: github.ref == 'ref/heads/test1'
-      run: echo "This is the main branch"
