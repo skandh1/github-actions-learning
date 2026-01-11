@@ -36,4 +36,4 @@ jobs:
     needs: hello-job
     steps:
     - name: Read job output
-      run: echo "Job result was ${{ needs.matrix-job.outputs.job-result }}"
+      run: echo "Job result was ${{ needs.hello-job.outputs.job-result }}"
