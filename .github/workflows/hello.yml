@@ -42,3 +42,16 @@ jobs:
         run: |
           echo "Node version: ${{ matrix.node-version }}"
           echo "OS: ${{ matrix.os }}"
+      
+      - name: Generate Output
+        id: generate
+        run: echo "result=success" >> $GITHUB_OUTPUT
+      
+      outputs:
+        job-results: ${{steps.generate.outputs.result}}
+
+  second_job:
+    needs: matrix-job
+    steps:
+    - name: Read job output
+      run: echo "Job result was ${{ needs.matrix-job.outputs.job-result }}"
