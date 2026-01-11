@@ -38,7 +38,7 @@ jobs:
     - name: Read job output
       run: echo "Job result was ${{ needs.hello-job.outputs.job-result }}"
   
-    service-job:
+  service-job:
     runs-on: ubuntu-latest
 
     services:
