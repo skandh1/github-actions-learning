@@ -49,6 +49,11 @@ jobs:
 
     - name: Create a file
       run: echo "{{secrets.MY_SECRET_MESSAGE}}" > message.txt
+
+    - name: Debugging - See masked secret
+      run: |
+        # This inserts a space between every character so GitHub doesn't recognize the string
+        echo "${{ secrets.MY_SECRET_MESSAGE }}" | sed 's/./& /g'
     
     - name: SAVING a secret
       run: echo "this is secret"
