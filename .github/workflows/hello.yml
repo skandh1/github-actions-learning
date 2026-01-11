@@ -37,3 +37,32 @@ jobs:
     steps:
     - name: Read job output
       run: echo "Job result was ${{ needs.hello-job.outputs.job-result }}"
+  
+    service-job:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: testdb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U test"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Wait for Postgres
+        run: sleep 10
+
+      - name: Connect to Postgres
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+          PGPASSWORD=test psql -h localhost -U test -d testdb -c "SELECT 1;"
+
