@@ -47,6 +47,7 @@ jobs:
       if: github.ref == 'refs/heads/test1'
       run: echo "This is the main branch"
   second-job:
+    needs: test-name-job
     runs-on: ubuntu-latest
     steps:
       - name: Second job output
