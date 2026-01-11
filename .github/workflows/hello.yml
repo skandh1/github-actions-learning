@@ -29,3 +29,16 @@ jobs:
       run: echo "for me and also in main"
 
 
+  matrix-job:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18, 20]
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Show matrix values
+        run: |
+          echo "Node version: ${{ matrix.node-version }}"
+          echo "OS: ${{ matrix.os }}"
