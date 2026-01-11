@@ -18,3 +18,5 @@ jobs:
         echo "Repository: $GITHUB_REPOSITORY"
         echo "Branch: $GITHUB_REF"
         echo "Triggered by: $GITHUB_ACTOR"
+    - name: Show current dir
+      run: pwd
