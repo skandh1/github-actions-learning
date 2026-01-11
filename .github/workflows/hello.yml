@@ -48,7 +48,15 @@ jobs:
       run: echo "This is the main branch"
 
     - name: Create a file
-      run: echo "created a file in job on" > message.txt
+      run: echo "{{secrets.MY_SECRET_MESSAGE}}" > message.txt
+    
+    - name: SAVING a secret
+      run: echo "this is secret"
+      env:
+        SECRET_MESSAGE: ${{secrets.MY_SECRET_MESSAGE}}
+      
+    - name: printing a secret
+      run: echo "$SECRET_MESSAGE"
     
     - name: upload artifact
       uses: actions/upload-artifact@v4
